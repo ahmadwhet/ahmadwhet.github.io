@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Huawei Switch dan Konfigurasi AAA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        h2 {
+            color: #555;
+        }
+        pre {
+            background-color: #eaeaea;
+            padding: 10px;
+            border-left: 3px solid #333;
+        }
+        code {
+            font-family: monospace;
+            color: #d63384;
+        }
+    </style>
+</head>
+<body>
+    <h1>Setup Huawei Switch dan Konfigurasi AAA</h1>
+
+    <h2>Langkah 1: Koneksi ke Switch</h2>
+    <ol>
+        <li><strong>Sambungkan Kabel Console:</strong> Gunakan kabel konsol untuk menghubungkan PC atau laptop ke port konsol switch.</li>
+        <li><strong>Buka Terminal Emulator:</strong> Gunakan program seperti PuTTY, Tera Term, atau HyperTerminal.</li>
+        <li><strong>Atur Parameter Koneksi:</strong>
+            <ul>
+                <li><code>Port:</code> Pilih port COM yang sesuai.</li>
+                <li><code>Baud Rate:</code> 9600 bps</li>
+                <li><code>Data Bits:</code> 8</li>
+                <li><code>Stop Bits:</code> 1</li>
+                <li><code>Parity:</code> None</li>
+                <li><code>Flow Control:</code> None</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2>Langkah 2: Masuk ke Mode CLI</h2>
+    <ol>
+        <li><strong>Akses Switch:</strong> Setelah terhubung, tekan <code>Enter</code> untuk masuk ke prompt CLI.</li>
+        <li><strong>Login:</strong> Jika diminta, masukkan username dan password (default bisa kosong).</li>
+        <li><strong>Masuk ke Mode Konfigurasi:</strong>
+            <pre><code>system-view</code></pre>
+        </li>
+    </ol>
+
+    <h2>Langkah 3: Konfigurasi Dasar</h2>
+    <h3>1. Konfigurasi Nama Switch</h3>
+    <pre><code>sysname Nama_Switch</code></pre>
+
+    <h3>2. Konfigurasi Interface VLAN</h3>
+    <p>Untuk mengatur VLAN (misalnya VLAN 10):</p>
+    <pre><code>vlan batch 10</code></pre>
+    <p>Lalu, untuk mengkonfigurasi interface VLAN 10:</p>
+    <pre><code>interface Vlanif10
+ip address 192.168.1.1 255.255.255.0</code></pre>
+
+    <h3>3. Mengatur Port ke VLAN</h3>
+    <p>Misalnya, untuk menambahkan port GigabitEthernet 0/0/1 ke VLAN 10:</p>
+    <pre><code>interface GigabitEthernet 0/0/1
+port link-type access
+port default vlan 10</code></pre>
+
+    <h3>4. Konfigurasi Routing (Jika Diperlukan)</h3>
+    <p>Jika switch mendukung routing dan Anda ingin mengatur routing statis:</p>
+    <pre><code>ip route-static 0.0.0.0 0.0.0.0 192.168.1.254</code></pre>
+
+    <h2>Langkah 4: Simpan Konfigurasi</h2>
+    <pre><code>save</code></pre>
+
+    <h2>Langkah 5: Verifikasi Konfigurasi</h2>
+    <p>Untuk memverifikasi konfigurasi, Anda dapat menggunakan beberapa perintah seperti:</p>
+    <pre><code>display interface brief</code></pre>
+    <pre><code>display vlan</code></pre>
+
+    <h2>Langkah 6: Membuat User dengan AAA</h2>
+    <h3>1. Masuk ke Mode Konfigurasi</h3>
+    <pre><code>system-view</code></pre>
+
+    <h3>2. Mengaktifkan AAA</h3>
+    <pre><code>aaa</code></pre>
+
+    <h3>3. Membuat User</h3>
+    <p>Untuk membuat user baru:</p>
+    <pre><code>local-user username password irreversible-cipher password</code></pre>
+    <p>Contoh:</p>
+    <pre><code>local-user admin password irreversible-cipher mySecurePassword123
+local-user admin privilege level 15
+local-user admin service-type telnet</code></pre>
+
+    <h3>4. Mengatur Otentikasi VTY</h3>
+    <ol>
+        <li>Masuk ke Konfigurasi VTY:
+            <pre><code>user-interface vty 0 4</code></pre>
+        </li>
+        <li>Mengatur Otentikasi dengan AAA:
+            <pre><code>authentication-mode aaa</code></pre>
+        </li>
+        <li>Mengatur Timeout (Opsional):
+            <pre><code>idle-timeout 60 0</code></pre>
+        </li>
+        <li>Mengatur Protocol Inbound:
+            <pre><code>protocol inbound all</code></pre>
+        </li>
+    </ol>
+    <ol>
+        <li>Mengatur Masuk Console dengan aaa</li>
+            <pre><code>user-interface con 0</code></pre>
+            <pre><code>authentication-mode aaa</code></pre>
+        </li>
+    </ol>
+
+    <h3>5. Simpan Konfigurasi</h3>
+    <pre><code>save</code></pre>
+
+    <h3>6. Verifikasi Konfigurasi User</h3>
+    <pre><code>display local-user</code></pre>
+
+    <h2>Catatan</h2>
+    <ul>
+        <li>Pastikan Anda memiliki izin yang diperlukan untuk mengakses dan mengkonfigurasi perangkat jaringan.</li>
+        <li>Gunakan password yang cukup kuat untuk keamanan yang lebih baik.</li>
+        <li>Perintah dan tampilan mungkin sedikit berbeda tergantung pada versi perangkat lunak yang digunakan.</li>
+    </ul>
+</body>
+</html>
