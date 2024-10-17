@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tagging VLAN pada Huawei Switch</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        h2 {
+            color: #555;
+        }
+        pre {
+            background-color: #eaeaea;
+            padding: 10px;
+            border-left: 3px solid #333;
+        }
+        code {
+            font-family: monospace;
+            color: #d63384;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tagging VLAN pada Huawei Switch</h1>
+
+    <h2>1. Konfigurasi VLAN Access</h2>
+    <p>Mode Access digunakan untuk port yang terhubung ke perangkat akhir (seperti komputer atau printer). Port ini hanya bisa mengakses satu VLAN.</p>
+    
+    <h3>Langkah-langkah:</h3>
+    <ol>
+        <li><strong>Masuk ke Mode Konfigurasi:</strong>
+            <pre><code>system-view</code></pre>
+        </li>
+        <li><strong>Buat VLAN (jika belum ada):</strong>
+            <pre><code>vlan batch 10</code></pre>
+        </li>
+        <li><strong>Konfigurasi Port sebagai Access:</strong>
+            <pre><code>interface GigabitEthernet 0/0/1
+port link-type access
+port default vlan 10</code></pre>
+        </li>
+    </ol>
+
+    <h2>2. Konfigurasi VLAN Trunk</h2>
+    <p>Mode Trunk digunakan untuk port yang menghubungkan perangkat jaringan (seperti switch ke switch) dan dapat mengangkut beberapa VLAN.</p>
+    
+    <h3>Langkah-langkah:</h3>
+    <ol>
+        <li><strong>Masuk ke Mode Konfigurasi:</strong>
+            <pre><code>system-view</code></pre>
+        </li>
+        <li><strong>Buat VLAN (jika belum ada):</strong>
+            <pre><code>vlan batch 10 20</code></pre>
+        </li>
+        <li><strong>Konfigurasi Port sebagai Trunk:</strong>
+            <pre><code>interface GigabitEthernet 0/0/2
+port link-type trunk
+port trunk allow-pass vlan 10 20</code></pre>
+        </li>
+    </ol>
+
+    <h2>3. Konfigurasi VLAN Hybrid</h2>
+    <p>Mode Hybrid adalah kombinasi antara mode Access dan Trunk. Port hybrid dapat mengakses VLAN tertentu sebagai access dan juga dapat mengangkut traffic dari VLAN lain.</p>
+    
+    <h3>Langkah-langkah:</h3>
+    <ol>
+        <li><strong>Masuk ke Mode Konfigurasi:</strong>
+            <pre><code>system-view</code></pre>
+        </li>
+        <li><strong>Buat VLAN (jika belum ada):</strong>
+            <pre><code>vlan batch 10 20</code></pre>
+        </li>
+        <li><strong>Konfigurasi Port sebagai Hybrid:</strong>
+            <pre><code>interface GigabitEthernet 0/0/3
+port link-type hybrid
+port hybrid allow-pass vlan 10
+port hybrid pvid vlan 20</code></pre>
+        </li>
+    </ol>
+
+    <h2>Catatan</h2>
+    <ul>
+        <li><strong>Access:</strong> Hanya dapat mengakses satu VLAN (VLAN default).</li>
+        <li><strong>Trunk:</strong> Dapat mengakses banyak VLAN dan sering digunakan untuk koneksi antar switch.</li>
+        <li><strong>Hybrid:</strong> Dapat mengakses VLAN tertentu sebagai Access dan mengizinkan VLAN lain sebagai Trunk.</li>
+    </ul>
+
+    <h2>Simpan Konfigurasi</h2>
+    <pre><code>save</code></pre>
+
+    <h2>Verifikasi Konfigurasi</h2>
+    <p>Untuk memverifikasi konfigurasi VLAN, Anda dapat menggunakan perintah berikut:</p>
+    <pre><code>display vlan</code></pre>
+    <pre><code>display interface brief</code></pre>
+    
+</body>
+</html>
