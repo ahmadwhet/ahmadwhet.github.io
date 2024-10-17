@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfigurasi QinQ pada Switch Cisco Nexus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        h2 {
+            color: #2980b9;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        ul {
+            margin: 10px 0;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Konfigurasi QinQ pada Switch Cisco Nexus</h1>
+
+    <h2>Pengantar</h2>
+    <p>
+        QinQ (tunneling 802.1Q) memungkinkan banyak VLAN untuk dienkapsulasi di dalam VLAN lain, memungkinkan transportasi lalu lintas VLAN di seluruh jaringan tanpa kehilangan informasi VLAN asli.
+    </p>
+
+    <h2>Langkah-langkah untuk Mengonfigurasi QinQ</h2>
+
+    <h3>1. Masuk ke Mode Konfigurasi</h3>
+    <pre>
+enable
+configure terminal
+    </pre>
+
+    <h3>2. Membuat VLAN</h3>
+    <p>Buat VLAN luar (S-VLAN) dan VLAN dalam (C-VLAN). Misalnya, gunakan VLAN 100 sebagai S-VLAN dan VLAN 10 sebagai C-VLAN:</p>
+    <pre>
+vlan 100
+  name S-VLAN
+
+vlan 10
+  name C-VLAN
+    </pre>
+
+    <h3>3. Mengonfigurasi Interface Trunk</h3>
+    <p>Pilih interface yang akan digunakan untuk QinQ dan atur ke mode trunk. Misalnya, menggunakan Ethernet 1/1:</p>
+    <pre>
+interface ethernet 1/1
+  switchport mode trunk
+  switchport trunk allowed vlan 10,100
+  switchport trunk native vlan 100
+  switchport mode dot1q-tunnel
+    </pre>
+
+    <h3>4. Mengaktifkan QinQ pada Interface</h3>
+    <pre>
+interface ethernet 1/1
+  switchport qinq enable
+    </pre>
+
+    <h3>5. Menyimpan Konfigurasi</h3>
+    <pre>
+end
+write memory
+    </pre>
+
+    <h3>6. Memverifikasi Konfigurasi</h3>
+    <p>Gunakan perintah berikut untuk memverifikasi bahwa QinQ telah dikonfigurasi dengan benar:</p>
+    <pre>
+show vlan brief
+show interface trunk
+show running-config interface ethernet 1/1
+    </pre>
+
+    <h2>Contoh Lengkap Konfigurasi</h2>
+    <pre>
+enable
+configure terminal
+
+vlan 100
+  name S-VLAN
+
+vlan 10
+  name C-VLAN
+
+interface ethernet 1/1
+  switchport mode trunk
+  switchport trunk allowed vlan 10,100
+  switchport trunk native vlan 100
+  switchport mode dot1q-tunnel
+  switchport qinq enable
+
+end
+write memory
+    </pre>
+
+</body>
+</html>

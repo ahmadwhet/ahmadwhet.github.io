@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Switch Cisco Nexus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        h2 {
+            color: #2980b9;
+        }
+        h3 {
+            color: #27ae60;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 10px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Setup Switch Cisco Nexus</h1>
+
+    <h2>Pengantar</h2>
+    <p>
+        Untuk mengatur (setup) switch Cisco melalui CLI menggunakan koneksi console, Anda memerlukan perangkat seperti kabel console (biasanya kabel rollover atau kabel USB-to-RJ45) dan software terminal seperti PuTTY, Tera Term, atau HyperTerminal. Berikut langkah-langkahnya:
+    </p>
+
+    <h2>Persiapan</h2>
+    <ul>
+        <li><strong>Sambungkan Kabel Console:</strong>
+            <ul>
+                <li>Hubungkan ujung RJ45 kabel console ke port console di switch Cisco.</li>
+                <li>Hubungkan ujung lainnya ke port serial di komputer atau ke port USB (jika menggunakan adaptor USB-to-RJ45).</li>
+            </ul>
+        </li>
+        <li><strong>Buka Software Terminal:</strong>
+            <ul>
+                <li>Buka aplikasi terminal (misalnya, PuTTY atau Tera Term).</li>
+                <li>Pilih koneksi Serial.</li>
+                <li>Atur Serial Line ke port COM yang sesuai (misalnya, COM3, COM4).</li>
+                <li>Atur Speed atau Baud rate ke 9600.</li>
+                <li>Klik Open untuk memulai sesi terminal.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Konfigurasi Dasar Switch</h2>
+    <p>Setelah berhasil terhubung ke switch melalui console, berikut langkah-langkah untuk konfigurasi dasar:</p>
+    <ol>
+        <li><strong>Masuk ke Mode Privileged:</strong>
+            <pre>Switch> enable</pre>
+        </li>
+        <li><strong>Masuk ke Mode Konfigurasi Global:</strong>
+            <pre>Switch# configure terminal</pre>
+        </li>
+        <li><strong>Atur Nama Host:</strong>
+            <pre>Switch(config)# hostname NamaSwitchAnda</pre>
+        </li>
+        <li><strong>Atur Password untuk Mode Privileged:</strong>
+            <pre>Switch(config)# enable password kata_sandi_anda</pre>
+        </li>
+        <li><strong>Atur Password Konsol:</strong>
+            <pre>Switch(config)# line console 0</pre>
+            <pre>Switch(config-line)# password kata_sandi_konsol</pre>
+            <pre>Switch(config-line)# login</pre>
+            <pre>Switch(config-line)# exit</pre>
+        </li>
+        <li><strong>Atur Password VTY (untuk akses Telnet/SSH):</strong>
+            <pre>Switch(config)# line vty 0 4</pre>
+            <pre>Switch(config-line)# password kata_sandi_vty</pre>
+            <pre>Switch(config-line)# login</pre>
+            <pre>Switch(config-line)# exit</pre>
+        </li>
+        <li><strong>Atur IP Address pada VLAN 1 (untuk akses jaringan):</strong>
+            <pre>Switch(config)# interface vlan 1</pre>
+            <pre>Switch(config-if)# ip address 192.168.1.2 255.255.255.0</pre>
+            <pre>Switch(config-if)# no shutdown</pre>
+            <pre>Switch(config-if)# exit</pre>
+        </li>
+        <li><strong>Atur Default Gateway (jika diperlukan):</strong>
+            <pre>Switch(config)# ip default-gateway 192.168.1.1</pre>
+        </li>
+        <li><strong>Simpan Konfigurasi:</strong>
+            <pre>Switch# write memory</pre>
+            <pre>atau</pre>
+            <pre>Switch# copy running-config startup-config</pre>
+        </li>
+        <li><strong>Keluar dari sesi:</strong>
+            <pre>Switch# exit</pre>
+        </li>
+    </ol>
+
+    <h2>Tips Tambahan:</h2>
+    <ul>
+        <li>Untuk memeriksa konfigurasi IP:
+            <pre>Switch# show ip interface brief</pre>
+        </li>
+        <li>Untuk melihat konfigurasi yang tersimpan:
+            <pre>Switch# show running-config</pre>
+        </li>
+    </ul>
+
+    <h2>Menambahkan User Login pada Cisco Switch</h2>
+    <p>Untuk menambahkan user login di switch Cisco melalui CLI, Anda bisa membuat username dengan password atau secret untuk mengamankan akses ke perangkat. Berikut langkah-langkahnya:</p>
+    <ol>
+        <li><strong>Masuk ke Mode Privileged:</strong>
+            <pre>Switch> enable</pre>
+        </li>
+        <li><strong>Masuk ke Mode Konfigurasi Global:</strong>
+            <pre>Switch# configure terminal</pre>
+        </li>
+        <li><strong>Tambahkan Username dengan Password:</strong>
+            <pre>Switch(config)# username nama_user password kata_sandi role network-admin</pre>
+            <pre>Contoh:</pre>
+            <pre>Switch(config)# username admin password cisco123 role network-admin</pre>
+        </li>
+        <li><strong>Tambahkan Username dengan Secret (opsional):</strong>
+            <pre>Switch(config)# username nama_user secret kata_sandi</pre>
+            <pre>Contoh:</pre>
+            <pre>Switch(config)# username admin secret cisco123</pre>
+        </li>
+        <li><strong>Pastikan VTY Line Menggunakan Login Local:</strong>
+            <pre>Switch(config)# line vty 0 4</pre>
+            <pre>Switch(config-line)# login local</pre>
+            <pre>Switch(config-line)# exit</pre>
+        </li>
+        <li><strong>Simpan Konfigurasi:</strong>
+            <pre>Switch# write memory</pre>
+            <pre>atau</pre>
+            <pre>Switch# copy running-config startup-config</pre>
+        </li>
+    </ol>
+
+    <h2>Menguji Login dengan User Baru</h2>
+    <p>Setelah menambahkan user login, Anda bisa menguji login dengan username dan password baru baik melalui console, Telnet, atau SSH.</p>
+    <p>Misalnya, jika Anda terhubung ke switch melalui Telnet:</p>
+    <pre>telnet 192.168.1.2</pre>
+    <p>Saat diminta, masukkan username dan password yang sudah Anda buat (admin dan cisco123 pada contoh di atas).</p>
+
+    <h2>Tips Tambahan:</h2>
+    <ul>
+        <li>Untuk enable feature telnet:
+            <pre>Switch# configure terminal</pre>
+            <pre>Switch(config)# feature telnet</pre>
+        </li>
+        <li>Untuk enable feature interface vlan:
+            <pre>Switch# configure terminal</pre>
+            <pre>Switch(config)# feature interface-vlan</pre>
+        </li>
+        <li>Untuk enable feature lacp / bonding:
+            <pre>Switch# configure terminal</pre>
+            <pre>Switch(config)# feature lacp</pre>
+        </li>
+        <li>Untuk enable feature lldp:
+            <pre>Switch# configure terminal</pre>
+            <pre>Switch(config)# feature lldp</pre>
+        </li>
+    </ul>
+
+</body>
+</html>
