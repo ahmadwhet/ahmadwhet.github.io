@@ -25,10 +25,10 @@
         }
         h1 {
             margin: 0;
-            font-size: 2.8em;
+            font-size: 2.2em;
         }
         p {
-            font-size: 1.2em;
+            font-size: 1.1em;
             margin-top: 10px;
         }
         .search-container {
@@ -36,7 +36,8 @@
         }
         .search-container input {
             padding: 10px;
-            width: 300px;
+            width: 90%; /* Adjusted for mobile */
+            max-width: 400px; /* Max width for larger screens */
             border: 1px solid #007BFF;
             border-radius: 5px;
             outline: none;
@@ -68,7 +69,7 @@
             transform: translateY(-5px);
         }
         h2 {
-            font-size: 1.5em;
+            font-size: 1.3em; /* Slightly smaller for mobile */
             margin: 0 0 10px 0;
         }
         footer {
@@ -94,12 +95,25 @@
             font-style: italic;
             color: #555;
         }
+
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8em; /* Smaller header on mobile */
+            }
+            p {
+                font-size: 1em; /* Smaller paragraph text on mobile */
+            }
+            article {
+                padding: 15px; /* Adjust article padding for mobile */
+            }
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Ayo Membaca</h1>
-        <p>Sharing my thoughts and ideas.</p>
+        <p>Kerja, biar bisa kenthu 😎</p>
     </header>
 
     <div class="search-container">
@@ -151,7 +165,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 My Simple Blog</p>
+        <p>&copy; 2024 Suck My Dig</p>
     </footer>
 
     <script>
