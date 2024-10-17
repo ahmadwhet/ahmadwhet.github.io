@@ -53,9 +53,9 @@
             background: white;
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            display: flex; /* Use flex for column layout */
+            flex-direction: column; /* Align items in a single column */
+            gap: 20px; /* Maintain spacing between articles */
         }
         article {
             padding: 20px;
@@ -95,6 +95,24 @@
             font-style: italic;
             color: #555;
         }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pagination button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: background-color 0.3s;
+        }
+        .pagination button:hover {
+            background-color: #0056b3;
+        }
 
         /* Responsive Styles */
         @media (max-width: 600px) {
@@ -121,68 +139,120 @@
     </div>
 
     <main id="articlesContainer">
-        <article>
-            <h2><a href="/html/setup-cisco.html">Setup Switch Cisco Nexus</a></h2>
-            <p><em>Published on: 17 October, 2024</em></p>
-            <p>Cara setup switch Cisco Nexus, mulai dari pembuatan user, hostname, telnet disini...</p>
-        </article>
-
-        <article>
-            <h2><a href="/html/tagging-vlan-cisco.html">Tagging VLAN Cisco</a></h2>
-            <p><em>Published on: 17 October, 2024</em></p>
-            <p>Cara tagging VLAN switch Cisco disini...</p>
-        </article>
-
-        <article>
-            <h2><a href="/html/lacp-cisco.html">LACP / Bonding Cisco</a></h2>
-            <p><em>Published on: 17 October, 2024</em></p>
-            <p>Cara membuat LACP atau bonding Cisco disini...</p>
-        </article>
-
-        <article>
-            <h2><a href="/html/qinq-cisco.html">QinQ Cisco</a></h2>
-            <p><em>Published on: 17 October, 2024</em></p>
-            <p>Cara membuat QinQ Cisco disini...</p>
-        </article>
-        
-        <article>
-            <h2><a href="/html/cek-log-cisco.html">Cek Log Cisco</a></h2>
-            <p><em>Published on: 17 October, 2024</em></p>
-            <p>Cara cek log Cisco disini...</p>
-        </article>
-
-        <article>
-            <h2><a href="/html/cek-port-cisco.html">Cek Port Cisco</a></h2>
-            <p><em>Published on: 17 October, 2024</em></p>
-            <p>Cara cek port Cisco disini...</p>
-        </article>
-
-        <article>
-            <h2><a href="index.html">Debug</a></h2>
-            <p><em>COKIL</em></p>
-            <p>ngecrit disini...</p>
-        </article>
+        <!-- Articles will be dynamically populated here -->
     </main>
+
+    <div class="pagination">
+        <button id="prevBtn" onclick="changePage(-1)">Previous</button>
+        <button id="nextBtn" onclick="changePage(1)">Next</button>
+    </div>
 
     <footer>
         <p>&copy; 2024 Suck My Dig</p>
     </footer>
 
     <script>
+        const articles = [
+            {
+                title: "Setup Switch Cisco Nexus",
+                date: "17 October, 2024",
+                description: "Cara setup switch Cisco Nexus, mulai dari pembuatan user, hostname, telnet disini...",
+                link: "/html/setup-cisco.html"
+            },
+            {
+                title: "Tagging VLAN Cisco",
+                date: "17 October, 2024",
+                description: "Cara tagging VLAN switch Cisco disini...",
+                link: "/html/tagging-vlan-cisco.html"
+            },
+            {
+                title: "LACP / Bonding Cisco",
+                date: "17 October, 2024",
+                description: "Cara membuat LACP atau bonding Cisco disini...",
+                link: "/html/lacp-cisco.html"
+            },
+            {
+                title: "QinQ Cisco",
+                date: "17 October, 2024",
+                description: "Cara membuat QinQ Cisco disini...",
+                link: "/html/qinq-cisco.html"
+            },
+            {
+                title: "Cek Log Cisco",
+                date: "17 October, 2024",
+                description: "Cara cek log Cisco disini...",
+                link: "/html/cek-log-cisco.html"
+            },
+            {
+                title: "Cek Port Cisco",
+                date: "17 October, 2024",
+                description: "Cara cek port Cisco disini...",
+                link: "/html/cek-port-cisco.html"
+            },
+            {
+                title: "Debug",
+                date: "17 October, 2024",
+                description: "ngecrit disini...",
+                link: "index.html"
+            }
+        ];
+
+        let currentPage = 0;
+        const articlesPerPage = 3;
+
+        function displayArticles() {
+            const start = currentPage * articlesPerPage;
+            const end = start + articlesPerPage;
+            const articlesContainer = document.getElementById('articlesContainer');
+
+            // Clear previous articles
+            articlesContainer.innerHTML = '';
+
+            // Display current page articles
+            articles.slice(start, end).forEach(article => {
+                const articleElement = document.createElement('article');
+                articleElement.innerHTML = `
+                    <h2><a href="${article.link}">${article.title}</a></h2>
+                    <p><em>Published on: ${article.date}</em></p>
+                    <p>${article.description}</p>
+                `;
+                articlesContainer.appendChild(articleElement);
+            });
+
+            // Handle button visibility
+            document.getElementById('prevBtn').style.display = currentPage === 0 ? 'none' : 'inline-block';
+            document.getElementById('nextBtn').style.display = end >= articles.length ? 'none' : 'inline-block';
+        }
+
+        function changePage(direction) {
+            currentPage += direction;
+            displayArticles();
+        }
+
         function searchArticles() {
             const input = document.getElementById('searchInput');
             const filter = input.value.toLowerCase();
-            const articles = document.querySelectorAll('article');
+            const articlesContainer = document.getElementById('articlesContainer');
 
+            // Clear previous articles
+            articlesContainer.innerHTML = '';
+
+            // Filter and display articles
             articles.forEach(article => {
-                const title = article.querySelector('h2 a').textContent.toLowerCase();
-                if (title.includes(filter)) {
-                    article.style.display = ''; // Show the article
-                } else {
-                    article.style.display = 'none'; // Hide the article
+                if (article.title.toLowerCase().includes(filter)) {
+                    const articleElement = document.createElement('article');
+                    articleElement.innerHTML = `
+                        <h2><a href="${article.link}">${article.title}</a></h2>
+                        <p><em>Published on: ${article.date}</em></p>
+                        <p>${article.description}</p>
+                    `;
+                    articlesContainer.appendChild(articleElement);
                 }
             });
         }
+
+        // Initial display
+        displayArticles();
     </script>
 </body>
 </html>
