@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Konfigurasi VXLAN dan Bridge Domain pada Switch Huawei</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        code {
+            background-color: #eee;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        pre {
+            background-color: #eee;
+            padding: 10px;
+            border-radius: 5px;
+            overflow: auto;
+        }
+        ul {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tutorial Konfigurasi VXLAN dan Bridge Domain pada Switch Huawei</h1>
+
+    <h2>Persyaratan</h2>
+    <ul>
+        <li>Switch Huawei yang mendukung VXLAN.</li>
+        <li>Akses ke perangkat melalui konsol, telnet atau SSH.</li>
+        <li>Konfigurasi jaringan dasar (VLAN, IP address, dan routing).</li>
+    </ul>
+
+    <h2>1. Konfigurasi Nve</h2>
+
+    <h3>Langkah-langkah Konfigurasi VXLAN VNI</h3>
+    <ol>
+        <li><strong>Masuk ke Mode Konfigurasi:</strong>
+            <pre><code>system-view</code></pre>
+        </li>
+        <li><strong>Buat Interface Nve:</strong>
+            <pre><code>Interface Nve1</code></pre>
+        </li>
+        <li><strong>Mengonfigurasi Pseudo-Wire:</strong>
+            <pre><code>source 10.10.102.1
+ vni 9510 head-end peer-list 10.10.102.2 // IP destination 
+ vni 9510 head-end peer-list 10.10.102.10 // IP destination
+ vni 9510 head-end peer-list 10.10.102.11 // IP destination</code></pre>
+
+    <h2>2. Menambahkan Bridge Domain ke VXLAN</h2>
+
+    <h3>Langkah-langkah Konfigurasi Bridge Domain</h3>
+    <ol>
+        <li><strong>Buat Bridge Domain:</strong>
+            <pre><code>bridge-domain 951</code></pre>
+        </li>
+        <li><strong>Menambahkan VNI ke Bridge Domain:</strong>
+            <pre><code>bridge-domain 951
+    vxlan vni 9510</code></pre>
+        </li>
+
+    <h2>3. Menambahkan Sub-Interface L2 Untagged ke Bridge Domain</h2>
+
+    <h3>Langkah-langkah Konfigurasi Sub-Interface L2 Untagged</h3>
+ 
+        <li><strong>Membuat Sub-Interface L2 Untagged:</strong>
+            <pre><code>interface GigabitEthernet 0/0/1.20 mode l2
+ encapsulation dot1q vid 20</code></pre>
+vid 20 merupakan vlan yang akan didelivery
+        </li>
+        <li><strong>Mengaitkan Sub-Interface dengan Bridge Domain:</strong>
+            <pre><code>bridge-domain 951</code></pre>
+        </li>
+        <li><strong>Simpan Konfigurasi:</strong>
+            <pre><code>save</code></pre>
+        </li>
+    </ol>
+
+    <h3>Verifikasi Konfigurasi Sub-Interface L2 Untagged</h3>
+    <pre><code>display bridge-domain</pre></code>
+    Tampilan seperti ini
+    <pre><code>The total number of bridge-domains is : 1
+--------------------------------------------------------------------------------
+MAC_LRN: MAC learning;         STAT: Statistics;         SPLIT: Split-horizon;
+BC: Broadcast;                 MC: Unknown multicast;    UC: Unknown unicast;
+*down: Administratively down;  FWD: Forward;             DSD: Discard;
+--------------------------------------------------------------------------------
+
+BDID       State MAC-LRN STAT    BC  MC  UC  SPLIT   Description
+--------------------------------------------------------------------------------
+951        up    enable  disable FWD FWD FWD disable</code></pre>
+
+Verif Konfigurasi
+<pre><code>display current-configuration interface GigabitEthernet 0/0/1.20</code></pre>
+tampilan kurang lebih seperti ini
+<pre><code>interface GigabitEthernet 0/0/1.20 mode l2
+ encapsulation dot1q vid 20
+ bridge-domain 951</code></pre>
+
+    <h2>Kesimpulan</h2>
+    <p>Dengan mengikuti langkah-langkah di atas, Anda telah berhasil mengonfigurasi VXLAN VNI, bridge domain, dan sub-interface L2 untagged pada switch Huawei. Pastikan untuk menyesuaikan ID bridge domain, VLAN, dan parameter lain sesuai dengan topologi jaringan Anda. Jika Anda memiliki pertanyaan lebih lanjut atau memerlukan bantuan tambahan, silakan tanyakan!</p>
+
+</body>
+</html>
