@@ -3,86 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Blog</title>
+    <title>Belajar Membaca</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f4f8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         header {
             text-align: center;
-            margin-bottom: 20px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #007BFF, #6BB2FF);
+            color: white;
+            width: 100%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         h1 {
-            color: #333;
+            margin: 0;
+            font-size: 2.8em;
+        }
+        p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        main {
+            max-width: 800px;
+            margin: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
         article {
-            background: white;
             padding: 20px;
-            margin-bottom: 20px;
+            border-left: 5px solid #007BFF;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            background: white;
+        }
+        article:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+        h2 {
+            font-size: 1.5em;
+            margin: 0 0 10px 0;
         }
         footer {
             text-align: center;
             margin-top: 20px;
             color: #777;
+            font-size: 0.9em;
+            padding: 20px;
+            background: #f0f4f8;
+            width: 100%;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+        em {
+            font-style: italic;
+            color: #555;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to My Blog</h1>
+        <h1>Udah Gila</h1>
         <p>Sharing my thoughts and ideas.</p>
     </header>
 
-    <article>
-        <h2><a href="/html/setup-cisco.html">SETUP SWITCH CISCO NEXUS</a></h2>
-        <p><em>Published on: 17 October, 2024</em></p>
-        <p>Cara setup swith cisco nexus, mulai dari pembuatan user, hostname, telnet disini...</p>
-    </article>
+    <main>
+        <article>
+            <h2><a href="/html/setup-cisco.html">Setup Switch Cisco Nexus</a></h2>
+            <p><em>Published on: 17 October, 2024</em></p>
+            <p>Cara setup switch Cisco Nexus, mulai dari pembuatan user, hostname, telnet disini...</p>
+        </article>
 
-    <article>
-        <h2><a href="/html/tagging-vlan-cisco.html">TAGGING VLAN CISCO</a></h2>
-        <p><em>Published on: 17 October, 2024</em></p>
-        <p>Cara tagging vlan switch cisco disini...</p>
-    </article>
+        <article>
+            <h2><a href="/html/tagging-vlan-cisco.html">Tagging VLAN Cisco</a></h2>
+            <p><em>Published on: 17 October, 2024</em></p>
+            <p>Cara tagging VLAN switch Cisco disini...</p>
+        </article>
 
-    <article>
-        <h2><a href="/html/lacp-cisco.html">LACP / BONDING CISCO</a></h2>
-        <p><em>Published on: 17 October, 2024</em></p>
-        <p>Cara membuat LACP atau bonding Cisco disini...</p>
-    </article>
+        <article>
+            <h2><a href="/html/lacp-cisco.html">LACP / Bonding Cisco</a></h2>
+            <p><em>Published on: 17 October, 2024</em></p>
+            <p>Cara membuat LACP atau bonding Cisco disini...</p>
+        </article>
 
-    <article>
-        <h2><a href="/html/qinq-cisco.html">QinQ CISCO</a></h2>
-        <p><em>Published on: 17 October, 2024</em></p>
-        <p>Cara membuat QinQ Cisco disini...</p>
-    </article>
-    
-    <article>
-        <h2><a href="/html/cek-log-cisco.html">CEK LOG CISCO</a></h2>
-        <p><em>Published on: 17 October, 2024</em></p>
-        <p>Cara cek log Cisco disini...</p>
-    </article>
+        <article>
+            <h2><a href="/html/qinq-cisco.html">QinQ Cisco</a></h2>
+            <p><em>Published on: 17 October, 2024</em></p>
+            <p>Cara membuat QinQ Cisco disini...</p>
+        </article>
+        
+        <article>
+            <h2><a href="/html/cek-log-cisco.html">Cek Log Cisco</a></h2>
+            <p><em>Published on: 17 October, 2024</em></p>
+            <p>Cara cek log Cisco disini...</p>
+        </article>
 
-    <article>
-        <h2><a href="/html/cek-port-cisco.html">CEK PORT CISCO</a></h2>
-        <p><em>Published on: 17 October, 2024</em></p>
-        <p>Cara cek port Cisco disini...</p>
-    </article>
+        <article>
+            <h2><a href="/html/cek-port-cisco.html">Cek Port Cisco</a></h2>
+            <p><em>Published on: 17 October, 2024</em></p>
+            <p>Cara cek port Cisco disini...</p>
+        </article>
 
-    <article>
-        <h2><a href="index.html">DEBUG</a></h2>
-        <p><em>COKIL</em></p>
-        <p>ngecrit disini</p>
-    </article>
-    
+        <article>
+            <h2><a href="index.html">Debug</a></h2>
+            <p><em>COKIL</em></p>
+            <p>ngecrit disini...</p>
+        </article>
+    </main>
+
     <footer>
-        <p>&copy; 2024 My Simple Blog</p>
+        <p>&copy; 2024 Wacid</p>
     </footer>
 </body>
 </html>
