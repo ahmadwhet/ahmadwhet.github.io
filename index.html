@@ -31,6 +31,20 @@
             font-size: 1.2em;
             margin-top: 10px;
         }
+        .search-container {
+            margin: 20px;
+        }
+        .search-container input {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+            outline: none;
+            transition: border 0.3s;
+        }
+        .search-container input:focus {
+            border-color: #0056b3;
+        }
         main {
             max-width: 800px;
             margin: 20px;
@@ -84,11 +98,15 @@
 </head>
 <body>
     <header>
-        <h1>Udah Gila</h1>
+        <h1>Ayo Membaca</h1>
         <p>Sharing my thoughts and ideas.</p>
     </header>
 
-    <main>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search articles by title..." onkeyup="searchArticles()">
+    </div>
+
+    <main id="articlesContainer">
         <article>
             <h2><a href="/html/setup-cisco.html">Setup Switch Cisco Nexus</a></h2>
             <p><em>Published on: 17 October, 2024</em></p>
@@ -133,7 +151,24 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Wacid</p>
+        <p>&copy; 2024 My Simple Blog</p>
     </footer>
+
+    <script>
+        function searchArticles() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const articles = document.querySelectorAll('article');
+
+            articles.forEach(article => {
+                const title = article.querySelector('h2 a').textContent.toLowerCase();
+                if (title.includes(filter)) {
+                    article.style.display = ''; // Show the article
+                } else {
+                    article.style.display = 'none'; // Hide the article
+                }
+            });
+        }
+    </script>
 </body>
 </html>
