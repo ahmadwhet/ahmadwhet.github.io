@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfigurasi LACP pada Switch Cisco Nexus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background-color: #eaeaea;
+            padding: 10px;
+            border-left: 5px solid #333;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Konfigurasi LACP pada Switch Cisco Nexus</h1>
+    
+    <h2>Langkah-langkah Konfigurasi</h2>
+    
+    <h3>1. Masuk ke Mode Konfigurasi Global:</h3>
+    <pre>configure terminal</pre>
+    
+    <h3>2. Buat Port Channel:</h3>
+    <pre>interface port-channel1</pre>
+    
+    <h3>3. Aktifkan Trunking dan Tag VLAN di Port Channel:</h3>
+    <pre>
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30
+    </pre>
+    
+    <h3>4. Konfigurasikan Port yang Akan Digabungkan:</h3>
+    <pre>
+interface ethernet1/1
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30
+channel-group 1 mode active
+
+interface ethernet1/2
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30
+channel-group 1 mode active
+    </pre>
+    
+    <h3>5. Verifikasi Konfigurasi:</h3>
+    <pre>
+show port-channel summary
+show lacp neighbor
+    </pre>
+    
+    <h2>Contoh Konfigurasi Lengkap</h2>
+    <pre>
+configure terminal
+
+interface port-channel1
+  switchport mode trunk
+  switchport trunk allowed vlan 10,20,30
+
+interface ethernet1/1
+  switchport mode trunk
+  switchport trunk allowed vlan 10,20,30
+  channel-group 1 mode active
+
+interface ethernet1/2
+  switchport mode trunk
+  switchport trunk allowed vlan 10,20,30
+  channel-group 1 mode active
+
+exit
+    </pre>
+    
+    <h2>Catatan Tambahan</h2>
+    <p>Pastikan bahwa VLAN yang ditambahkan telah dibuat dan tersedia di switch. Anda dapat membuat VLAN menggunakan perintah berikut:</p>
+    <pre>
+vlan 10
+vlan 20
+vlan 30
+    </pre>
+    
+    
+</body>
+</html>
