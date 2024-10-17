@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Log pada Switch Cisco Nexus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-left: 4px solid #007bff;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cara Cek Log dengan Detail pada Switch Cisco Nexus</h1>
+
+    <h2>1. Masuk ke Mode EXEC</h2>
+    <p>Pastikan kamu sudah terhubung ke switch dan berada di mode EXEC. Jika belum, masuk ke mode EXEC dengan menggunakan perintah berikut:</p>
+    <pre>enable</pre>
+
+    <h2>2. Mengaktifkan Logging</h2>
+    <p>Jika logging belum diaktifkan, aktifkan di mode konfigurasi:</p>
+    <pre>
+    configure terminal
+    logging enable
+    </pre>
+
+    <h2>3. Menampilkan Log</h2>
+    <p>Gunakan perintah berikut untuk menampilkan log secara detail:</p>
+    <ul>
+        <li><strong>Menampilkan Log Terakhir:</strong>
+            <pre>show logging</pre>
+        </li>
+        <li><strong>Menampilkan Log dengan Tanggal dan Waktu:</strong>
+            <pre>show logging | include timestamp</pre>
+        </li>
+    </ul>
+
+    <h2>4. Menampilkan Log dengan Filter</h2>
+    <p>Gunakan filter untuk menampilkan log yang lebih spesifik:</p>
+    <pre>show logging | include &lt;severity-level&gt;</pre>
+    <p>Ganti &lt;severity-level&gt; dengan level yang diinginkan (misalnya: <code>informational</code>, <code>warning</code>, <code>error</code>).</p>
+
+    <h2>5. Menampilkan Log Secara Real-Time</h2>
+    <p>Untuk melihat log secara real-time, gunakan perintah berikut:</p>
+    <pre>terminal monitor</pre>
+    <p>Tekan <code>Ctrl + C</code> untuk menghentikannya.</p>
+
+    <h2>6. Menyimpan Log ke File (Opsional)</h2>
+    <p>Jika ingin menyimpan log ke file, gunakan perintah berikut:</p>
+    <pre>show logging | redirect flash:log.txt</pre>
+    <p>Ini akan menyimpan log ke dalam file <code>log.txt</code> di flash memory switch.</p>
+
+    <h2>7. Memeriksa Log Spesifik</h2>
+    <p>Untuk memeriksa log berdasarkan waktu atau peristiwa tertentu:</p>
+    <pre>show logging | begin &lt;keyword&gt;</pre>
+    <p>Ganti &lt;keyword&gt; dengan kata kunci yang relevan.</p>
+
+    <h2>Contoh Penggunaan</h2>
+    <p>Berikut adalah contoh perintah untuk melihat log:</p>
+    <pre>
+show logging
+show logging | include error
+show logging | include 2024
+    </pre>
+
+    <p>Dengan menggunakan perintah-perintah di atas, kamu dapat memeriksa dan menganalisis log pada switch Cisco Nexus dengan detail. Jika ada pertanyaan lebih lanjut, jangan ragu untuk bertanya!</p>
+</body>
+</html>
