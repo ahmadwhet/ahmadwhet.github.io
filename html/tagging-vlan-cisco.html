@@ -3,108 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tagging VLAN pada Switch Cisco Nexus</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Konfigurasi VLAN Cisco Nexus</title>
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: Arial, sans-serif;
+            margin: 20px;
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f4f8;
-            color: #333;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
         }
         h1, h2 {
-            margin: 20px 0;
-        }
-        ol {
-            margin-left: 20px;
+            color: #333;
         }
         pre {
-            background-color: #eaeaea;
-            padding: 15px;
-            border-radius: 5px;
-            overflow: auto;
-            font-size: 14px;
-        }
-        code {
-            font-family: monospace;
-            background-color: #f9f9f9;
-            padding: 2px 4px;
-            border-radius: 3px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 12px;
-            color: #777;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-left: 4px solid #007bff;
+            overflow-x: auto;
         }
     </style>
 </head>
 <body>
+    <h1>Konfigurasi VLAN pada Switch Cisco Nexus</h1>
 
-    <header>
-        <h1>Tagging VLAN pada Switch Cisco Nexus</h1>
-    </header>
+    <h2>1. Konfigurasi Access Port</h2>
+    <p>Access port digunakan untuk menghubungkan perangkat yang hanya memerlukan satu VLAN (misalnya, PC). Port ini tidak akan mengirimkan tag VLAN.</p>
     
-    <div class="container">
-        <h2>Langkah-langkah Konfigurasi</h2>
-        <ol>
-            <li><strong>Masuk ke Mode Konfigurasi Global:</strong>
-                <pre><code>configure terminal</code></pre>
-            </li>
-            
-            <li><strong>Pilih Interface yang Akan Dikonfigurasi:</strong>
-                <pre><code>interface ethernet1/1</code></pre>
-            </li>
-            
-            <li><strong>Aktifkan Mode Trunk:</strong>
-                <pre><code>switchport mode trunk</code></pre>
-            </li>
-            
-            <li><strong>Tentukan VLAN yang Diizinkan:</strong>
-                <pre><code>switchport trunk allowed vlan 10,20,30</code></pre>
-            </li>
-            
-            <li><strong>Verifikasi Konfigurasi:</strong>
-                <pre><code>show interface ethernet1/1 switchport</code></pre>
-            </li>
-        </ol>
+    <h3>Langkah-langkah:</h3>
+    <pre>
+    configure terminal
+    interface Ethernet1/1
+    switchport mode access
+    switchport access vlan 10  # Ganti 10 dengan ID VLAN yang sesuai
+    end
+    write memory
+    </pre>
 
-        <h2>Contoh Konfigurasi Lengkap</h2>
-        <pre><code>configure terminal
+    <h2>2. Konfigurasi Trunk Port</h2>
+    <p>Trunk port digunakan untuk menghubungkan switch dan dapat membawa beberapa VLAN. Port ini akan mengirimkan tag VLAN.</p>
+    
+    <h3>Langkah-langkah:</h3>
+    <pre>
+    configure terminal
+    interface Ethernet1/2
+    switchport mode trunk
+    switchport trunk allowed vlan 10,20,30  # Ganti dengan ID VLAN yang sesuai
+    end
+    write memory
+    </pre>
 
-interface ethernet1/1
-  switchport mode trunk
-  switchport trunk allowed vlan 10,20,30  ! Ganti dengan VLAN yang sesuai
+    <h2>3. Verifikasi Konfigurasi</h2>
+    <p>Setelah melakukan konfigurasi, kamu bisa memverifikasi dengan perintah berikut:</p>
+    <ul>
+        <li>Untuk access port:
+            <pre>show running-config interface Ethernet1/1</pre>
+        </li>
+        <li>Untuk trunk port:
+            <pre>show running-config interface Ethernet1/2</pre>
+        </li>
+        <li>Untuk melihat status trunk:
+            <pre>show interface trunk</pre>
+        </li>
+    </ul>
 
-exit</code></pre>
-
-        <h2>Catatan Tambahan</h2>
-        <p>Pastikan bahwa VLAN yang ingin Anda tambahkan telah dibuat sebelumnya. Anda dapat membuat VLAN menggunakan perintah berikut:</p>
-        <pre><code>vlan 10
-vlan 20
-vlan 30</code></pre>
-        <p>Setelah konfigurasi, pastikan untuk menguji koneksi untuk memastikan VLAN ditagging dengan benar di jaringan Anda.</p>
-    </div>
-
-    <footer>
-        <p>&copy; 2024 Tagging VLAN pada Cisco Nexus</p>
-    </footer>
-
+    <p>Dengan langkah-langkah di atas, kamu bisa mengkonfigurasi VLAN tagging pada switch Cisco Nexus sesuai kebutuhan. Pastikan untuk mengganti <code>Ethernet1/1</code> dan <code>Ethernet1/2</code> dengan interface yang sesuai pada switch kamu.</p>
 </body>
 </html>
