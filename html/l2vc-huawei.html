@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPLS L2VC HUAWEI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f8f8;
+        }
+    </style>
+</head>
+<body>
+    <h1>MPLS L2VC HUAWEI</h1>
+    <h2>Fungsi</h2>
+    <p>Menghubungkan 2 node dengan tunneling, pertama pastikan fitur routing dan mpls pada switch huawei aktif</p>
+    <p>Perintah <code>mpls l2vc</code> digunakan untuk membuat Martini VLL.</p>
+    <p>Perintah <code>undo mpls l2vc</code> menghapus Martini VLL dari sebuah interface.</p>
+    <p>Secara default, tidak ada koneksi L2VPN Martini yang dibuat.</p>
+    
+    <h2>Format</h2>
+    <pre>
+mpls l2vc { ip-address | pw-template pw-template-name } * vc-id [ group-id group-id | tunnel-policy policy-name | [ control-word | no-control-word ] | [ raw | tagged ] | mtu mtu-value | [ secondary | bypass ] | ignore-standby-state ] *
+undo mpls l2vc { ip-address | pw-template pw-template-name } * vc-id [ group-id group-id | tunnel-policy policy-name | [ control-word | no-control-word ] | [ raw | tagged ] | mtu mtu-value | [ secondary | bypass ] | ignore-standby-state ] *
+undo mpls l2vc [ secondary | bypass ]
+    </pre>
+    
+    <h2>Parameter</h2>
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Deskripsi</th>
+            <th>Nilai</th>
+        </tr>
+        <tr>
+            <td>ip-address</td>
+            <td>Menentukan ID LSR dari perangkat peer pada PW.</td>
+            <td>Format desimal bertitik.</td>
+        </tr>
+        <tr>
+            <td>pw-template pw-template-name</td>
+            <td>Menentukan nama template PW.</td>
+            <td>String 1 hingga 19 karakter sensitif terhadap huruf besar, tidak mendukung spasi.</td>
+        </tr>
+        <tr>
+            <td>vc-id</td>
+            <td>Menentukan ID L2VC.</td>
+            <td>Integer dari 1 hingga 4294967295.</td>
+        </tr>
+        <tr>
+            <td>group-id</td>
+            <td>Menentukan ID grup VC.</td>
+            <td>Integer dari 1 hingga 4294967295.</td>
+        </tr>
+        <tr>
+            <td>tunnel-policy policy-name</td>
+            <td>Menentukan nama kebijakan terowongan.</td>
+            <td>String 1 hingga 39 karakter sensitif terhadap huruf besar, tidak mendukung spasi.</td>
+        </tr>
+        <tr>
+            <td>control-word</td>
+            <td>Mengaktifkan fungsi kata kontrol.</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>no-control-word</td>
+            <td>Menonaktifkan fungsi kata kontrol.</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>mtu mtu-value</td>
+            <td>Menentukan nilai MTU.</td>
+            <td>Integer dari 46 hingga 9600 (default 1500).</td>
+        </tr>
+        <tr>
+            <td>secondary</td>
+            <td>Menentukan VC sekunder.</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>bypass</td>
+            <td>Menentukan VC bypass.</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>ignore-standby-state</td>
+            <td>Menentukan PW mengabaikan informasi status siaga yang dikirim oleh perangkat remote.</td>
+            <td>-</td>
+        </tr>
+    </table>
+    
+    <h2>Panduan Penggunaan</h2>
+    <p>Dalam jaringan VLL Martini, Anda dapat menjalankan perintah ini untuk membuat koneksi VC.</p>
+    <p>Perhatian: Sebuah interface tidak dapat berfungsi sebagai L2VPN AC dan L3VPN AC secara bersamaan.</p>
+    
+    <h2>Contoh</h2>
+    <pre>
+# Buat koneksi Martini pada interface VLANIF.
+<HUAWEI> system-view
+[HUAWEI] vlan batch 10
+[HUAWEI] interface vlanif 10
+[HUAWEI-Vlanif10] mpls l2vc 10.2.2.9 100
+
+# Buat koneksi Martini pada GE0/0/1.
+<HUAWEI> system-view
+[HUAWEI] interface gigabitethernet 0/0/1
+[HUAWEI-GigabitEthernet0/0/1] undo portswitch
+[HUAWEI-GigabitEthernet0/0/1] mpls l2vc 10.2.2.9 100
+    </pre>
+</body>
+</html>
