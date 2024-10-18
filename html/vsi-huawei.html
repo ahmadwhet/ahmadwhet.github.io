@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfigurasi VSI tunneling pada Huawei Switch CLI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        code {
+            background-color: #e8e8e8;
+            padding: 5px;
+            display: block;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #e8e8e8;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Konfigurasi VSI dan PEER pada Huawei Switch CLI</h1>
+
+        <h2>Langkah 1: Buat VSI</h2>
+        <p>1. Masuk ke mode konfigurasi global:</p>
+        <pre><code>system-view</code></pre>
+        <p>2. Buat VSI dengan nama tertentu:</p>
+        <pre><code>vsi &lt;vsi-name&gt; static</code></pre>
+        <p>Contoh:</p>
+        <pre><code>vsi VPLS_TEST static</code></pre>
+
+        <h2>Langkah 2: Konfigurasi Peer (LDP Signaling)</h2>
+        <p>Peer digunakan untuk menghubungkan ke PE (Provider Edge) lain melalui LDP.</p>
+        <p>1. Masuk ke mode VSI lagi:</p>
+        <pre><code>vsi VPLS_TEST static</code></pre>
+        <p>2. Tambahkan PEER ke VSI:</p>
+        <pre><code>peer &lt;peer-ip&gt; ldp</code></pre>
+        <p>Contoh untuk PE dengan IP <code>192.168.1.1</code>Sehingga akan seperti ini</p>
+        <pre><code>vsi VPLS_TEST static
+  peer 192.168.1.1 ldp</code></pre>
+
+        <h2>Langkah 3: Konfigurasi Dot1q Termination dan VSI</h1>
+        <p>Langkah ini akan membantu Anda untuk melakukan konfigurasi Dot1q termination di interface dan menghubungkannya ke VSI.</p>
+
+        <h3>Langkah-langkah</h3>
+        <p>Buat <em>Dot1q termination</em> di interface:</p>
+
+        <pre>
+        <code>[Huawei] interface GigabitEthernet0/0/2
+[Huawei-GigabitEthernet0/0/2] dot1q termination vid 200
+[Huawei-GigabitEthernet0/0/2] vsi VPLS_TEST
+[Huawei-GigabitEthernet0/0/2] quit</code>
+    </pre>
+
+    <h3>Penjelasan</h3>
+    <ul>
+        <li><code>dot1q termination vid 200</code>Mengakhiri Dot1q pada VLAN ID 200.</li>
+        <li><code>vsi VPLS_TEST</code>Menambahkan interface ke dalam VSI yang bernama <strong>VPLS_TEST</strong>.</li>
+    </ul>
+
+        <h2>Langkah 4: Verifikasi Konfigurasi</h2>
+        <p>Untuk memastikan bahwa VSI dan peer telah dikonfigurasi dengan benar, Anda bisa menggunakan perintah berikut:</p>
+        <ul>
+            <li>Cek status VSI:
+                <pre><code>display vsi all</code></pre>
+            </li>
+            <li>Cek status LDP peer:
+                <pre><code>display ldp session</code></pre>
+            </li>
+            <li>Cek status L2VPN:
+                <pre><code>display l2vpn vsi &lt;vsi-name&gt;</code></pre>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
