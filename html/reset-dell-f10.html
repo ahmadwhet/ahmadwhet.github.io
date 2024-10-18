@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Switch Force10 Instructions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        .section {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        pre {
+            background: #eaeaea;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .done {
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="section">
+        <h2>Reset Switch Force10 S4810 + S60</h2>
+        <ol>
+            <li>Koneksikan USB serial dengan baud rate 9600.</li>
+            <li>Reboot switch.</li>
+            <li>Tekan tombol apa saja pada keyboard untuk masuk ke menu boot.</li>
+            <li>Ketik syntax berikut:</li>
+        </ol>
+        <pre>
+BOOT_USER #setenv stconfigignore true
+BOOT_USER #saveenv
+BOOT_USER #reset
+        </pre>
+        <p class="done">#done</p>
+    </div>
+
+    <div class="section">
+        <h2>Reset Switch Force10 S50N</h2>
+        <ol>
+            <li>Koneksikan USB serial dengan baud rate 9600.</li>
+            <li>Reboot switch.</li>
+            <li>Tekan angka 1 atau 2 pada keyboard untuk masuk ke menu boot.</li>
+            <li>Ketik syntax berikut:</li>
+        </ol>
+        <pre>
+BOOT_USER #restore factory-defaults
+BOOT_USER #reload
+        </pre>
+        <p class="done">#done</p>
+    </div>
+
+    <div class="section">
+        <h2>Reset Force10 S50</h2>
+        <p>Bisa dilakukan dengan langkah berikut:</p>
+        <ol>
+            <li>Connect ke port console.</li>
+            <li>Power cycle switch.</li>
+            <li>Tekan Ctrl+C saat proses booting. Jika muncul prompt <code>#</code>, maka proses berhasil. Jika muncul <code>=></code>, ulangi lagi.</li>
+            <li>Gunakan perintah berikut untuk overwrite konfigurasi:</li>
+        </ol>
+        <pre>
+sysctl -w ddb.command="call flashStrataJ3CEraseSector(0x01a00000)"
+sysctl -w ddb.command="call flashStrataJ3CEraseSector(0x01a40000)"
+sysctl -w ddb.command="call flashStrataJ3CEraseSector(0x01a80000)"
+sysctl -w ddb.command="call flashStrataJ3CEraseSector(0x01ac0000)"
+sysctl -w ddb.command="call flashStrataJ3CEraseSector(0x01b00000)"
+sysctl -w ddb.command="call flashStrataJ3CEraseSector(0x01b40000)"
+sysctl -w ddb.command="call flashStrataJ3CEraseSector(0x01b80000)"
+sysctl -w ddb.command="call flashStrataJ3CEraseSector(0x01bc0000)"
+sysctl -w ddb.command="call flashStrataJ3CEraseSector(0x01c00000)"
+sysctl -w ddb.command="call flashStrataJ3CEraseSector(0x01c40000)"
+sysctl -w ddb.command="call flashStrataJ3CEraseSector(0x01c80000)"
+sysctl -w ddb.command="call flashStrataJ3CEraseSector(0x01cc0000)"
+        </pre>
+        <li>Gunakan perintah berikut untuk restart switch:</li>
+        <pre>
+sysctl -w ddb.command="call ssCpldBoardReset"
+        </pre>
+        <p>Setelah selesai, switch akan kembali ke default tanpa konfigurasi console atau enable password.</p>
+    </div>
+
+    <div class="section">
+        <h2>Cara Lain Reset Switch Force10 S4810 + S60</h2>
+        <ol>
+            <li>Koneksikan console dengan baud rate 9600.</li>
+            <li>Hidupkan switch dan login.</li>
+            <li>Ketik syntax berikut:</li>
+        </ol>
+        <pre>
+#restore factory-defaults stack-unit 0 clear-all
+        </pre>
+        <li>Ketik "yes" dan tunggu switch untuk restart otomatis.</li>
+        <li>Tekan tombol "A" saat masuk ke mode BMP/ACLS untuk melanjutkan booting.</li>
+        <p class="done">#done</p>
+    </div>
+
+</body>
+</html>
