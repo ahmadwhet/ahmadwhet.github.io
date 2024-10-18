@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cara Cek Log pada Huawei Switch</title>
+    <title>Cara Cek Log dan Konfigurasi pada Huawei Switch</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,10 +38,10 @@
 </head>
 <body>
     <div class="container">
-        <h1>Cara Cek Log pada Huawei Switch</h1>
+        <h1>Cara Cek Log dan Konfigurasi pada Huawei Switch</h1>
         <ol>
             <li><strong>Masuk ke CLI Switch Huawei</strong>
-                <p>Hubungkan ke switch Huawei melalui telnet, SSH atau menggunakan kabel console.</p>
+                <p>Hubungkan ke switch Huawei melalui SSH atau menggunakan kabel console.</p>
             </li>
             <li><strong>Masukkan Nama Pengguna dan Kata Sandi</strong>
                 <p>Masukkan <code>username</code> dan <code>password</code> yang telah diatur untuk akses switch.</p>
@@ -76,6 +76,14 @@
             <li><strong>Menghapus Log (Jika Diperlukan)</strong>
                 <pre>reset logbuffer</pre>
                 <p>Perintah ini akan menghapus semua log yang ada di dalam log buffer.</p>
+            </li>
+            <li><strong>Cara Mengecek Konfigurasi Switch</strong>
+                <pre>display current-configuration</pre>
+                <p>Perintah ini akan menampilkan konfigurasi yang sedang berjalan (running configuration) pada switch.</p>
+            </li>
+            <li><strong>Cara Mengecek Konfigurasi include</strong>
+                <pre>display current-configuration | include &lt;nama-include&gt;</pre>
+                <p>Ganti <code>&lt;nama-include&gt;</code> dengan nama bagian yang ingin Anda cek, seperti <code>interface</code> atau <code>vlan</code>. Ini akan menampilkan hanya bagian konfigurasi yang terkait.</p>
             </li>
         </ol>
     </div>
