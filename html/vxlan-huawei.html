@@ -57,7 +57,7 @@
  vni 9510 head-end peer-list 10.10.102.2 // IP destination 
  vni 9510 head-end peer-list 10.10.102.10 // IP destination
  vni 9510 head-end peer-list 10.10.102.11 // IP destination</code></pre>
-
+        </li></ol>
 <h2>2. Menambahkan Bridge Domain ke VXLAN</h2>
 
     <h3>Langkah-langkah Konfigurasi Bridge Domain</h3>
@@ -68,12 +68,12 @@
         <li><strong>Menambahkan VNI ke Bridge Domain:</strong>
             <pre><code>bridge-domain 951
     vxlan vni 9510</code></pre>
-        </li>
+        </li></ol>
 
 <h2>3. Menambahkan Sub-Interface L2 Untagged ke Bridge Domain</h2>
 
     <h3>Langkah-langkah Konfigurasi Sub-Interface L2 Untagged</h3>
- 
+ <ol>
         <li><strong>Membuat Sub-Interface L2 Untagged:</strong>
             <pre><code>interface GigabitEthernet 0/0/1.20 mode l2
  encapsulation dot1q vid 20</code></pre>
