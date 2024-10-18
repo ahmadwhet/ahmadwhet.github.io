@@ -55,3 +55,17 @@ sysctl -w ddb.command="call flashStrataJ3CEraseSector(0x01cc0000)"
 sysctl -w ddb.command="call ssCpldBoardReset"
 
 On completion you should be at a defaulted switch with no console or enable passwords configured.
+
+
+=================================
+Cara lain reset switch force10 s4810 + S60
+=================================
+1. konekkan console di bautrate 9600
+2. hidupkan switch, login
+3. ketik syntax berikut :
+
+#restore factory-defaults stack-unit 0 clear-all
+
+4. Ketik "yes" dan tunggu switch restart sendiri
+5. Tekan A ketika masuk di mode BMP/ACLS untuk melanjutkan booting
+#done
