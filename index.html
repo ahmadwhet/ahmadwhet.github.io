@@ -3,306 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belajar Membaca</title>
+    <title>TEST</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
+        /* Reset CSS for better cross-browser compatibility */
+        * {
             margin: 0;
             padding: 0;
-            background: #f0f4f8;
+            box-sizing: border-box;
+        }
+
+        /* Body and Font Styling */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
             color: #333;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: #333;
+            padding: 1rem;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
         }
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #007BFF, #6BB2FF);
-            color: white;
-            width: 100%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        h1 {
-            margin: 0;
-            font-size: 2.2em;
-        }
-        p {
-            font-size: 1.1em;
-            margin-top: 10px;
-        }
-        .search-container {
-            margin: 20px;
-        }
-        .search-container input {
-            padding: 10px;
-            width: 90%; /* Adjusted for mobile */
-            max-width: 400px; /* Max width for larger screens */
-            border: 1px solid #007BFF;
-            border-radius: 5px;
-            outline: none;
-            transition: border 0.3s;
-        }
-        .search-container input:focus {
-            border-color: #0056b3;
-        }
-        main {
-            max-width: 800px;
-            margin: 20px;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            display: flex; /* Use flex for column layout */
-            flex-direction: column; /* Align items in a single column */
-            gap: 20px; /* Maintain spacing between articles */
-        }
-        article {
-            padding: 20px;
-            border-left: 5px solid #007BFF;
-            border-radius: 8px;
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
-            background: white;
-        }
-        article:hover {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            transform: translateY(-5px);
-        }
-        h2 {
-            font-size: 1.3em; /* Slightly smaller for mobile */
-            margin: 0 0 10px 0;
-        }
-        footer {
-            text-align: center;
-            margin-top: 20px;
-            color: #777;
-            font-size: 0.9em;
-            padding: 20px;
-            background: #f0f4f8;
-            width: 100%;
-            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-        }
-        a {
+
+        nav a {
+            color: #fff;
             text-decoration: none;
-            color: #007BFF;
-            transition: color 0.2s;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
         }
-        a:hover {
-            color: #0056b3;
-            text-decoration: underline;
+
+        nav a:hover {
+            color: #ddd;
         }
-        em {
-            font-style: italic;
-            color: #555;
-        }
-        .pagination {
+
+        /* Hero Section */
+        .hero {
+            background: url('https://source.unsplash.com/random/1600x900') no-repeat center center/cover;
+            height: 80vh;
             display: flex;
+            align-items: center;
             justify-content: center;
-            margin-top: 20px;
+            color: #fff;
+            text-align: center;
+            padding: 0 2rem;
         }
-        .pagination button {
-            padding: 10px 15px;
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+        }
+
+        .btn-primary {
+            background-color: #e91e63;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
             border: none;
-            border-radius: 5px;
-            background-color: #007BFF;
-            color: white;
+            border-radius: 25px;
             cursor: pointer;
-            margin: 0 5px;
-            transition: background-color 0.3s;
-        }
-        .pagination button:hover {
-            background-color: #0056b3;
+            transition: background-color 0.3s ease;
         }
 
-        /* Responsive Styles */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 1.8em; /* Smaller header on mobile */
-            }
-            p {
-                font-size: 1em; /* Smaller paragraph text on mobile */
-            }
-            article {
-                padding: 15px; /* Adjust article padding for mobile */
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Ayo Membaca</h1>
-        <p>Kerja, biar bisa kenthu 😎</p>
-    </header>
-
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search articles by title..." onkeyup="searchArticles()">
-    </div>
-
-    <main id="articlesContainer">
-        <!-- Articles will be dynamically populated here -->
-    </main>
-
-    <div class="pagination">
-        <button id="prevBtn" onclick="changePage(-1)">Previous</button>
-        <button id="nextBtn" onclick="changePage(1)">Next</button>
-    </div>
-
-    <footer>
-        <p>&copy; 2024 Suck My Dig</p>
-    </footer>
-
-    <script>
-        const articles = [
-            {
-                title: "Setup Switch Cisco Nexus",
-                date: "17 October, 2024",
-                description: "Cara setup switch Cisco Nexus, mulai dari pembuatan user, hostname, telnet disini...",
-                link: "/html/setup-cisco.html"
-            },
-            {
-                title: "Tagging VLAN Cisco",
-                date: "17 October, 2024",
-                description: "Cara tagging VLAN switch Cisco disini...",
-                link: "/html/tagging-vlan-cisco.html"
-            },
-            {
-                title: "LACP / Bonding Cisco",
-                date: "17 October, 2024",
-                description: "Cara membuat LACP atau bonding Cisco disini...",
-                link: "/html/lacp-cisco.html"
-            },
-            {
-                title: "QinQ Cisco",
-                date: "17 October, 2024",
-                description: "Cara membuat QinQ Cisco disini...",
-                link: "/html/qinq-cisco.html"
-            },
-            {
-                title: "Cek Log Cisco",
-                date: "17 October, 2024",
-                description: "Cara cek log Cisco disini...",
-                link: "/html/cek-log-cisco.html"
-            },
-            {
-                title: "Cek Port Cisco",
-                date: "17 October, 2024",
-                description: "Cara cek port Cisco disini...",
-                link: "/html/cek-port-cisco.html"
-            },
-            {
-                title: "Setup Huawei Switch",
-                date: "17 October, 2024",
-                description: "Cara Setup Huawei Switch disini...",
-                link: "/html/setup-huawei-switch.html"
-            },
-            {
-                title: "Tagging VLAN Huawei",
-                date: "17 October, 2024",
-                description: "Cara Tagging vlan Huawei Switch disini...",
-                link: "/html/tagging-switch-huawei.html"
-            },
-            {
-                title: "VXLAN Huawei",
-                date: "17 October, 2024",
-                description: "Cara Membuat VNI dan VXLAN di Huawei",
-                link: "/html/vxlan-huawei.html"
-            },
-            {
-                title: "Tunneling Huawei Using VSI",
-                date: "18 October, 2024",
-                description: "Tunnel huawei menggunakan VSI",
-                link: "/html/vsi-huawei.html"
-            },
-            {
-                title: "Cek Running Config dan Cek Log Huawei",
-                date: "18 October, 2024",
-                description: "Check Log dan konfigurasi Huawei",
-                link: "/html/cek-log-huawei.html"
-            },
-            {
-                title: "L2VC Tunneling Huawei",
-                date: "18 October, 2024",
-                description: "L2VC Huawei",
-                link: "/html/l2vc-huawei.html"
-            },
-            {
-                title: "Stacking Switch Huawei",
-                date: "18 October, 2024",
-                description: "Cara Stacking Switch Huawei",
-                link: "/html/stack-huawei.html"
-            },
-            {
-                title: "Reset Config Dell Force10",
-                date: "18 October, 2024",
-                description: "Berikut cara reset config dell force10 dapat dicek disini",
-                link: "/html/reset-dell-f10.html"
-            },
-            {
-                title: "Upgrade Firmware Huawei",
-                date: "18 October, 2024",
-                description: "tutorial upgrade firmware huawei dapat dicek disini",
-                link: "/html/ug-firmware-huawei.html"
-            }
-            
-
-        ];
-
-        let currentPage = 0;
-        const articlesPerPage = 4;
-
-        function displayArticles() {
-            const start = currentPage * articlesPerPage;
-            const end = start + articlesPerPage;
-            const articlesContainer = document.getElementById('articlesContainer');
-
-            // Clear previous articles
-            articlesContainer.innerHTML = '';
-
-            // Display current page articles
-            articles.slice(start, end).forEach(article => {
-                const articleElement = document.createElement('article');
-                articleElement.innerHTML = `
-                    <h2><a href="${article.link}">${article.title}</a></h2>
-                    <p><em>Published on: ${article.date}</em></p>
-                    <p>${article.description}</p>
-                `;
-                articlesContainer.appendChild(articleElement);
-            });
-
-            // Handle button visibility
-            document.getElementById('prevBtn').style.display = currentPage === 0 ? 'none' : 'inline-block';
-            document.getElementById('nextBtn').style.display = end >= articles.length ? 'none' : 'inline-block';
+        .btn-primary:hover {
+            background-color: #c2185b;
         }
 
-        function changePage(direction) {
-            currentPage += direction;
-            displayArticles();
+        /* Main Content Sections */
+        .content-section {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
         }
 
-        function searchArticles() {
-            const input = document.getElementById('searchInput');
-            const filter = input.value.toLowerCase();
-            const articlesContainer = document.getElementById('articlesContainer');
-
-            // Clear previous articles
-            articlesContainer.innerHTML = '';
-
-            // Filter and display articles
-            articles.forEach(article => {
-                if (article.title.toLowerCase().includes(filter)) {
-                    const articleElement = document.createElement('article');
-                    articleElement.innerHTML = `
-                        <h2><a href="${article.link}">${article.title}</a></h2>
-                        <p><em>Published on: ${article.date}</em></p>
-                        <p>${article.description}</p>
-                    `;
-                    articlesContainer.appendChild(articleElement);
-                }
-            });
-        }
-
-        // Initial display
-        displayArticles();
-    </script>
-</body>
-</html>
+        .content-section:nth
