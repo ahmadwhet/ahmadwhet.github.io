@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elegant Web Page</title>
+    <title>Dark Theme Web Page</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #121212;
+            color: #e0e0e0;
         }
 
         /* Navigation Bar */
         nav {
-            background-color: #333;
-            color: #fff;
+            background-color: #1e1e1e;
+            color: #e0e0e0;
             padding: 1rem;
             display: flex;
             justify-content: space-between;
@@ -25,11 +26,13 @@
             width: 100%;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         nav .logo {
             font-size: 1.5rem;
             font-weight: 700;
+            color: #e0e0e0;
         }
 
         nav ul {
@@ -42,40 +45,43 @@
         }
 
         nav ul li a {
-            color: #fff;
+            color: #e0e0e0;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         nav ul li a:hover {
-            color: #ddd;
+            color: #bbbbbb;
         }
 
         /* Hero Section */
         .hero {
-            background: url('https://source.unsplash.com/1600x900/?nature,landscape') no-repeat center center/cover;
+            background: url('https://source.unsplash.com/1600x900/?night,city') no-repeat center center/cover;
             height: 100vh;
-            color: #fff;
+            color: #e0e0e0;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
             flex-direction: column;
+            background-blend-mode: multiply;
         }
 
         .hero h1 {
             font-size: 3rem;
             margin: 0;
+            color: #e0e0e0;
         }
 
         .hero p {
             font-size: 1.2rem;
             max-width: 600px;
+            color: #cccccc;
         }
 
         .hero .btn {
             background-color: #007bff;
-            color: #fff;
+            color: #e0e0e0;
             padding: 0.8rem 1.5rem;
             border: none;
             border-radius: 5px;
@@ -99,7 +105,7 @@
         .content h2 {
             text-align: center;
             margin-bottom: 1rem;
-            color: #333;
+            color: #e0e0e0;
         }
 
         .cards {
@@ -109,9 +115,9 @@
         }
 
         .card {
-            background-color: #fff;
+            background-color: #1e1e1e;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             overflow: hidden;
             transition: transform 0.2s ease;
         }
@@ -136,7 +142,7 @@
         }
 
         .card-content p {
-            color: #666;
+            color: #cccccc;
             margin-top: 0.5rem;
         }
 
@@ -154,11 +160,12 @@
 
         /* Footer */
         footer {
-            background-color: #333;
-            color: #fff;
+            background-color: #1e1e1e;
+            color: #e0e0e0;
             padding: 1rem;
             text-align: center;
             margin-top: 2rem;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
         }
 
         footer p {
@@ -185,7 +192,7 @@
                 display: block;
                 width: 25px;
                 height: 3px;
-                background-color: #fff;
+                background-color: #e0e0e0;
                 margin: 5px 0;
             }
         }
@@ -193,7 +200,7 @@
 </head>
 <body>
     <nav>
-        <div class="logo">My Site</div>
+        <div class="logo">My Dark Site</div>
         <div class="menu-toggle">
             <span></span>
             <span></span>
@@ -208,8 +215,8 @@
     </nav>
 
     <div class="hero">
-        <h1>Welcome to My Website</h1>
-        <p>Discover the beauty of a simple yet elegant design that adapts to your needs and captures your imagination.</p>
+        <h1>Welcome to My Dark Theme Website</h1>
+        <p>Experience the sophistication of dark mode with a design that feels modern and immersive.</p>
         <a href="#" class="btn">Get Started</a>
     </div>
 
@@ -217,7 +224,7 @@
         <h2>Our Features</h2>
         <div class="cards">
             <div class="card">
-                <img src="https://source.unsplash.com/600x400/?technology" alt="Feature 1">
+                <img src="https://source.unsplash.com/600x400/?technology,dark" alt="Feature 1">
                 <div class="card-content">
                     <h3>Feature One</h3>
                     <p>Explore the latest technologies with our state-of-the-art solutions tailored to meet your needs.</p>
@@ -225,7 +232,7 @@
                 </div>
             </div>
             <div class="card">
-                <img src="https://source.unsplash.com/600x400/?design" alt="Feature 2">
+                <img src="https://source.unsplash.com/600x400/?design,dark" alt="Feature 2">
                 <div class="card-content">
                     <h3>Feature Two</h3>
                     <p>Experience the elegance of modern design with our user-friendly interfaces and layouts.</p>
@@ -233,7 +240,7 @@
                 </div>
             </div>
             <div class="card">
-                <img src="https://source.unsplash.com/600x400/?nature" alt="Feature 3">
+                <img src="https://source.unsplash.com/600x400/?nature,dark" alt="Feature 3">
                 <div class="card-content">
                     <h3>Feature Three</h3>
                     <p>Immerse yourself in a seamless experience that blends functionality with style.</p>
@@ -244,7 +251,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2024 My Elegant Site. All Rights Reserved.</p>
+        <p>&copy; 2024 My Dark Site. All Rights Reserved.</p>
     </footer>
 
     <script>
