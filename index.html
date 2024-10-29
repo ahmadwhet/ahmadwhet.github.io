@@ -3,264 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Theme Web Page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>About Me</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #121212;
-            color: #e0e0e0;
+            padding: 20px;
+            background-color: #f4f4f4;
         }
-
-        /* Navigation Bar */
-        nav {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        nav .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #e0e0e0;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-        }
-
-        nav ul li {
-            margin: 0 1rem;
-        }
-
-        nav ul li a {
-            color: #e0e0e0;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: #bbbbbb;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: url('https://source.unsplash.com/1600x900/?night,city') no-repeat center center/cover;
-            height: 100vh;
-            color: #e0e0e0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
             text-align: center;
-            flex-direction: column;
-            background-blend-mode: multiply;
         }
-
-        .hero h1 {
-            font-size: 3rem;
+        h1 {
             margin: 0;
-            color: #e0e0e0;
         }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            color: #cccccc;
-        }
-
-        .hero .btn {
-            background-color: #007bff;
-            color: #e0e0e0;
-            padding: 0.8rem 1.5rem;
-            border: none;
+        section {
+            margin: 20px 0;
+            background: #fff;
+            padding: 15px;
             border-radius: 5px;
-            text-decoration: none;
-            font-weight: 500;
-            margin-top: 1rem;
-            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-
-        .hero .btn:hover {
-            background-color: #0056b3;
-        }
-
-        /* Content Section */
-        .content {
-            padding: 2rem 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .content h2 {
-            text-align: center;
-            margin-bottom: 1rem;
-            color: #e0e0e0;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background-color: #1e1e1e;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            transition: transform 0.2s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .card-content {
-            padding: 1rem;
-        }
-
-        .card-content h3 {
-            margin: 0;
-            color: #007bff;
-        }
-
-        .card-content p {
-            color: #cccccc;
-            margin-top: 0.5rem;
-        }
-
-        .card-content a {
-            display: inline-block;
-            margin-top: 1rem;
-            color: #007bff;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .card-content a:hover {
-            text-decoration: underline;
-        }
-
-        /* Footer */
         footer {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
-            padding: 1rem;
             text-align: center;
-            margin-top: 2rem;
-            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        footer p {
-            margin: 0;
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                display: none;
-            }
-
-            nav ul.active {
-                display: flex;
-            }
-
-            nav .menu-toggle {
-                display: block;
-                cursor: pointer;
-            }
-
-            nav .menu-toggle span {
-                display: block;
-                width: 25px;
-                height: 3px;
-                background-color: #e0e0e0;
-                margin: 5px 0;
-            }
+            margin-top: 20px;
+            color: #555;
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="logo">My Dark Site</div>
-        <div class="menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
 
-    <div class="hero">
-        <h1>Welcome to My Dark Theme Website</h1>
-        <p>Experience the sophistication of dark mode with a design that feels modern and immersive.</p>
-        <a href="#" class="btn">Get Started</a>
-    </div>
+<header>
+    <h1>About Me</h1>
+</header>
 
-    <section class="content">
-        <h2>Our Features</h2>
-        <div class="cards">
-            <div class="card">
-                <img src="https://source.unsplash.com/600x400/?technology,dark" alt="Feature 1">
-                <div class="card-content">
-                    <h3>Feature One</h3>
-                    <p>Explore the latest technologies with our state-of-the-art solutions tailored to meet your needs.</p>
-                    <a href="#">Learn More</a>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://source.unsplash.com/600x400/?design,dark" alt="Feature 2">
-                <div class="card-content">
-                    <h3>Feature Two</h3>
-                    <p>Experience the elegance of modern design with our user-friendly interfaces and layouts.</p>
-                    <a href="#">Learn More</a>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://source.unsplash.com/600x400/?nature,dark" alt="Feature 3">
-                <div class="card-content">
-                    <h3>Feature Three</h3>
-                    <p>Immerse yourself in a seamless experience that blends functionality with style.</p>
-                    <a href="#">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </section>
+<section>
+    <h2>Profile</h2>
+    <p>Hi! I'm Ahmadwhet, a passionate developer with a keen interest in [insert your interests, e.g., web development, machine learning, etc.].</p>
+</section>
 
-    <footer>
-        <p>&copy; 2024 My Dark Site. All Rights Reserved.</p>
-    </footer>
+<section>
+    <h2>GitHub Projects</h2>
+    <ul>
+        <li><a href="https://github.com/ahmadwhet/project1">Project 1</a> - A brief description of what this project does.</li>
+        <li><a href="https://github.com/ahmadwhet/project2">Project 2</a> - A brief description of what this project does.</li>
+        <li><a href="https://github.com/ahmadwhet/project3">Project 3</a> - A brief description of what this project does.</li>
+    </ul>
+</section>
 
-    <script>
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('nav ul');
+<section>
+    <h2>Contact</h2>
+    <p>You can reach me at: <a href="mailto:ahmadws18@gmail.com">ahmadws18@gmail.com</a></p>
+    <p>Check out my GitHub: <a href="https://github.com/ahmadwhet">github.com/ahmadwhet</a></p>
+</section>
 
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-    </script>
+<footer>
+    <p>&copy; 2024 Madleets</p>
+</footer>
+
 </body>
 </html>
