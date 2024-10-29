@@ -3,47 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>About Ahmad Whet</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
+            padding: 0;
+            background: linear-gradient(135deg, #ff6a6a, #ffb3b3);
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            overflow-x: hidden;
         }
         header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
+            background-color: rgba(255, 105, 180, 0.8);
+            padding: 20px;
             text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            margin: 20px;
+            position: relative;
+            animation: slideIn 0.5s ease-in-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         h1 {
             margin: 0;
+            font-size: 3em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            transition: transform 0.3s;
+        }
+        h1:hover {
+            transform: scale(1.1);
         }
         section {
-            margin: 20px 0;
-            background: #fff;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s;
+        }
+        section:hover {
+            transform: scale(1.02);
+        }
+        h2 {
+            color: #ffeb3b;
+            margin-top: 0;
+            text-shadow: 1px 1px 10px rgba(255, 255, 255, 0.8);
+            position: relative;
+            display: inline-block;
+        }
+        h2::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 4px;
+            background: #ffeb3b;
+            transition: transform 0.3s;
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+        h2:hover::after {
+            transform: scaleX(1);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #00e676;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        a:hover {
+            color: #1de9b6;
+            text-shadow: 0 0 10px #1de9b6, 0 0 20px #1de9b6;
         }
         footer {
             text-align: center;
-            margin-top: 20px;
-            color: #555;
+            padding: 20px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+            margin: 20px;
+            border-radius: 10px;
+        }
+        /* Floating effect for the footer */
+        @keyframes float {
+            0% { transform: translatey(0); }
+            50% { transform: translatey(-10px); }
+            100% { transform: translatey(0); }
+        }
+        footer:hover {
+            animation: float 2s ease-in-out infinite;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>About Me</h1>
+    <h1>About Ahmad Whet</h1>
 </header>
 
 <section>
     <h2>Profile</h2>
-    <p>Hi! I'm Ahmadwhet, a passionate developer with a keen interest in [insert your interests, e.g., web development, machine learning, etc.].</p>
+    <p>Hi! I'm Ahmad Whet, a passionate developer with a keen interest in web development, machine learning, and open-source projects. I enjoy creating innovative solutions and exploring new technologies.</p>
 </section>
 
 <section>
@@ -57,12 +129,12 @@
 
 <section>
     <h2>Contact</h2>
-    <p>You can reach me at: <a href="mailto:ahmadws18@gmail.com">ahmadws18@gmail.com</a></p>
+    <p>You can reach me at: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
     <p>Check out my GitHub: <a href="https://github.com/ahmadwhet">github.com/ahmadwhet</a></p>
 </section>
 
 <footer>
-    <p>&copy; 2024 Madleets</p>
+    <p>&copy; 2024 Ahmad Whet</p>
 </footer>
 
 </body>
